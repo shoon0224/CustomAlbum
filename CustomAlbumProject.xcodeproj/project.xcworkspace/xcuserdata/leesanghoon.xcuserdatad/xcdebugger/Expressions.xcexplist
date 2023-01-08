@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "AlbumViewController.requestCollection():AlbumViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "normalAlbums.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in AlbumViewController.requestCollection():AlbumViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "smartAlbum.estimatedAssetCount">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SceneDelegate.sceneWillEnterForeground(_:):SceneDelegate.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "window">
+            </PersistentString>
+            <PersistentString
+               value = "AlbumViewController">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in AlbumViewController.requestCollection():AlbumViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "normalAlbum.estimatedAssetCount">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
