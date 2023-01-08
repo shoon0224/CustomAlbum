@@ -19,12 +19,12 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="nyA-WP-sYY" kind="relationship" relationship="rootViewController" id="fE8-32-MqZ"/>
+                        <segue destination="nyA-WP-sYY" kind="relationship" relationship="rootViewController" id="PRZ-kc-oJs"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3ZT-4d-SDg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-531" y="-673"/>
+            <point key="canvasLocation" x="-393" y="-675"/>
         </scene>
         <!--앨범-->
         <scene sceneID="1Ot-Jb-RUP">
@@ -103,7 +103,7 @@
                                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jCh-fg-5Ro">
                                                                                                     <rect key="frame" x="0.0" y="0.0" width="7.666666666666667" height="14.333333333333334"/>
                                                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                                                                    <nil key="textColor"/>
+                                                                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                                                                     <nil key="highlightedColor"/>
                                                                                                 </label>
                                                                                             </subviews>
@@ -178,7 +178,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3wW-bH-bO4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="224" y="-673"/>
+            <point key="canvasLocation" x="271" y="-675"/>
         </scene>
         <!--Image Collection View Controller-->
         <scene sceneID="c6d-qM-ae1">
@@ -269,7 +269,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ebg-YE-se9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="984" y="-674"/>
+            <point key="canvasLocation" x="935" y="-675"/>
         </scene>
     </scenes>
     <resources>
