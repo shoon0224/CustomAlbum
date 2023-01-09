@@ -6,7 +6,7 @@ class AlbumViewController: UIViewController {
     
     @IBOutlet weak var albumTableView: UITableView!
     
-    private var allAlbums = [AlbumInfo]() //앨범 리스트
+    
     private let imageManager =  PHCachingImageManager()
     
     override func viewDidLoad() {
@@ -21,65 +21,14 @@ class AlbumViewController: UIViewController {
         self.albumTableView.delegate = self
     }
     
-    //MARK: - 앨범 정보 가져오기
-    private func requestPHAssetCollection() {
-        let normalAlbums = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: PHFetchOptions())
-        let smartAlbums = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumUserLibrary, options: PHFetchOptions())
-        let format = "mediaType == %d"
-        
-        //스마트 앨범 데이터 추가
-        guard 0 < smartAlbums.count else { return }
-        smartAlbums.enumerateObjects { smartAlbum, index, pointer in
-            guard index <= smartAlbums.count - 1 else {
-                pointer.pointee = true
-                return
-            }
-            if smartAlbum.estimatedAssetCount == NSNotFound {
-                let fetchOptions = PHFetchOptions()
-                fetchOptions.predicate = .init(format: format + " || " + format,
-                                               PHAssetMediaType.image.rawValue)
-                fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-                let smartAlbums = PHAsset.fetchAssets(in: smartAlbum, options: fetchOptions)
-                self.allAlbums.append(
-                    .init(
-                        name: smartAlbum.localizedTitle ?? "",
-                        count: smartAlbums.count,
-                        album: smartAlbums
-                    )
-                )
-            }
-        }
-        
-        //일반 앨범 데이터 추가
-        guard 0 < normalAlbums.count else { return }
-        normalAlbums.enumerateObjects { normalAlbum, index, pointer in
-            guard index <= normalAlbums.count - 1 else {
-                pointer.pointee = true
-                return
-            }
-            if normalAlbum.estimatedAssetCount != NSNotFound {
-                let fetchOptions = PHFetchOptions()
-                fetchOptions.predicate = .init(format: format + " || " + format,
-                                               PHAssetMediaType.image.rawValue)
-                fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
-                let normalAlbums = PHAsset.fetchAssets(in: normalAlbum, options: fetchOptions)
-                self.allAlbums.append(
-                    .init(
-                        name: normalAlbum.localizedTitle ?? "",
-                        count: normalAlbums.count,
-                        album: normalAlbums
-                    )
-                )
-            }
-        }
-    }
+    
     
     //MARK: - 권한 설정
     func photoAuthorization(){
         let photoAuthorizationStatus = PHPhotoLibrary.authorizationStatus()
         switch photoAuthorizationStatus {
         case .authorized: //허용
-            self.requestPHAssetCollection()
+            PhotosService.requestPHAssetCollection()
             DispatchQueue.main.async {
                 self.albumTableView.reloadData()
             }
@@ -87,7 +36,7 @@ class AlbumViewController: UIViewController {
             PHPhotoLibrary.requestAuthorization({ (status) in
                 switch status {
                 case .authorized: //허용
-                    self.requestPHAssetCollection()
+                    PhotosService.requestPHAssetCollection()
                     DispatchQueue.main.async {
                         self.albumTableView.reloadData()
                     }
@@ -137,12 +86,12 @@ class AlbumViewController: UIViewController {
 extension AlbumViewController: UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.allAlbums.count
+        return PhotosService.allAlbums.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: AlbumTableViewCell = tableView.dequeueReusableCell(withIdentifier: "AlbumTableViewCell", for: indexPath) as! AlbumTableViewCell
-        let asset = self.allAlbums[indexPath.item].album
+        let asset = PhotosService.allAlbums[indexPath.item].album
         
         //asset.firstObject 반드시 옵셔널타입이여야 한다해서 조건문으로 예외처리
         if asset.firstObject != nil {
@@ -156,8 +105,8 @@ extension AlbumViewController: UITableViewDataSource{
                 }
             })
         }
-        cell.albumNameLabel.text = self.allAlbums[indexPath.row].name
-        cell.assetCountLabel.text = String(self.allAlbums[indexPath.row].count)
+        cell.albumNameLabel.text = PhotosService.allAlbums[indexPath.row].name
+        cell.assetCountLabel.text = String(PhotosService.allAlbums[indexPath.row].count)
         return cell
     }
 }
@@ -173,8 +122,8 @@ extension AlbumViewController: UITableViewDelegate {
             title: "", style: .plain, target: nil, action: nil)
         //뒤로가기 버튼색 변경
         self.navigationItem.backBarButtonItem?.tintColor = UIColor.black
-        imageCollectionViewController.title = self.allAlbums[indexPath.row].name
-        imageCollectionViewController.asset = self.allAlbums[indexPath.row].album
+        imageCollectionViewController.title = PhotosService.allAlbums[indexPath.row].name
+        imageCollectionViewController.asset = PhotosService.allAlbums[indexPath.row].album
         self.navigationController?.pushViewController(imageCollectionViewController, animated: true)
     }
 }
